@@ -1,0 +1,13 @@
+(define (recursive-insertion-sort arr)
+  (define (insert e arr)
+    (let loop ((left '()) (right arr) (e e))
+      (cond ((null? right)
+             (append (reverse left) (list e)))
+            ((and (null? left) (<= e (car right)))
+             (cons e right))
+            ((and (not (null? left)) (< (car left) e) (<= e (car right)))
+             (append (append (reverse left) (list e)) right))
+            (else (loop (cons (car right) left) (cdr right) e)))))
+  (if (null? (cdr arr))
+      arr
+      (insert (car arr) (recursive-insertion-sort (cdr arr)))))
