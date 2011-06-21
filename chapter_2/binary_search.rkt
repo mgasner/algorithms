@@ -1,0 +1,8 @@
+(define (binary-search-1 el list)
+  (if (null? list)
+      '()
+      (let* ((pos (floor (/ (length list) 2)))
+             (elt (list-ref list pos)))
+        (cond ((= elt el) pos)
+              ((< elt el) (binary-search-1 el (drop list (+ pos 1))))
+              (else (binary-search-1 el (take list pos)))))))
