@@ -30,7 +30,22 @@
                 (begin
                   (set-matrix-entry! mat i j (list-ref (list-ref l i) j))
                   (loop i (+ j 1)))))))))
-                  
+
+(define (matrix-binary-elementwise-operation a b f)
+  (let* ((n (nrows a)) (m (ncols a)) (c (make-matrix n m)))
+    (let loop ((i 0) (j 0))
+      (if (= i n)
+          c
+          (if (= j m)
+              (loop (+ i 1) 0)
+              (begin (set-matrix-entry! c i j
+                       (f (get-matrix-entry a i j)
+                          (get-matrix-entry b i j)))
+                     (loop i (+ j 1))))))))
+
+(define (matrix-add a b) (matrix-binary-elementwise-operation a b +))
+(define (matrix-sub a b) (matrix-binary-elementwise-operation a b -))
+
 (define (square-matrix-multiply a b)
   (let* ((n (nrows a)) (c (make-matrix n n)))
     (let loop ((i 0) (j 0) (k 0))
