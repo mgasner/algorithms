@@ -8,3 +8,4 @@
               (begin
                 (set! q (max q (+ (vector-ref p i) (cut-rod p (- n i)))))
                 (loop (+ i 1))))))))
+            
