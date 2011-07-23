@@ -57,3 +57,21 @@
                   (loop i (+ j 1) 0)
                   (begin (set-matrix-entry! c i j (+ (get-matrix-entry c i j) (* (get-matrix-entry a i k) (get-matrix-entry b k j))))
                   (loop i j (+ k 1)))))))))
+                  
+(define (square-matrix-multiply-recursive a b)
+  (let* ((n (nrows a)) (c (make-matrix n n))
+  
+; strassen's method
+; divide the input and output matrices into n/2 x n/2 submatrices
+; create ten matrices each of which is n/2 * n/2
+; recursively compute seven matrix products P1 - P7
+
+(define (square-matrix-multiply-recursive a b a_m a_n b_m b_n)
+  (let* ((n (nrows a)) (c (make-matrix n n)))
+    (if (= n 1)
+        (begin
+          (set-matrix-entry! c 1 1 (* (get-matrix-entry a 1 1)
+            (get-matrix-entry b 1 1)))
+          c)
+        ()
+        
